@@ -27,6 +27,14 @@ def save_object(file_path, obj):
 
 def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
     try:
+        modelScore = {'modelName'   :[],
+                      'R2core'      :[],
+                      'aR2'         :[],
+                      'MSE'         :[],
+                      'MAE'         :[],
+                      'RMSE'        :[]
+                      }
+
         ar2Score = {}
         j = 0
         k = 0
@@ -55,11 +63,17 @@ def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
             ar2Score[list(models.keys())[i]] = aR2
 
             modelName = list(models.keys())[i]
-            modelScore = createDictOfScores(modelName, modelScore, R2test_model_score, aR2, MSE, MAE, RMSE)
 
+            modelScore['modelName'].append(modelName)
+            modelScore['R2core'].append(R2test_model_score)
+            modelScore['aR2'].append(aR2)
+            modelScore['MSE'].append(MSE)
+            modelScore['MAE'].append(MAE)
+            modelScore['RMSE'].append(RMSE)
             k = k+1
 
-        print(modelScore)
+        print(pd.DataFrame(modelScore))
+        #print(modelScore)
         print(ar2Score)
 
         return ar2Score
@@ -77,34 +91,3 @@ def load_object(file_path):
         raise CustomException(e, sys)
 
 
-def createDictOfScores(modelName,modelScore,R2test_model_score,aR2,MSE,MAE,RMSE):
-    modelScore = {}
-
-    if modelName in modelScore:
-        modelScore[modelName].append(R2test_model_score)
-    else:
-        modelScore[modelName] = R2test_model_score
-
-    if modelName in modelScore:
-        modelScore[modelName].append(aR2)
-    else:
-        modelScore[modelName] = aR2
-
-    if modelName in modelScore:
-        modelScore[modelName].append(MSE)
-    else:
-        modelScore[modelName] = MSE
-
-    if modelName in modelScore:
-        modelScore[modelName].append(MAE)
-    else:
-        modelScore[modelName] = MAE
-
-    if modelName in modelScore:
-        modelScore[modelName].append(RMSE)
-
-    else:
-        modelScore[modelName] = RMSE
-
-
-    return modelScore
