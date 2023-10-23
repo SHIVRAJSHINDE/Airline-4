@@ -30,11 +30,8 @@ class splittingAndTrainingClass():
                 obj = transformationOfData
             )
 
-
             models,params = self.ModelTrainerClass.modelsToTrainAndParameters()
             self.ModelTrainerClass.modelTraingMethod(X_train, X_test, y_train, y_test,models,params)
-
-
 
         except Exception as e:
             raise CustomException(e, sys)
