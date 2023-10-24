@@ -1,2 +1,2 @@
 ,Airline,Source,Destination,Total_Stops,Day,Month,Year,Dep_Hours,Dep_Minutes,Arrival_Hours,Arrival_Minutes,hoursMinutes
-0,Jet Airways,Banglore,Banglore,non-stop,25,10,2023,22,52,23,53,61
+0,Jet Airways,Banglore,Cochin,non-stop,25,10,2023,21,55,22,56,61

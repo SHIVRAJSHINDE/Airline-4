@@ -5,7 +5,7 @@ import pickle
 import pandas as pd
 from Source.prediction.predictionPipline import CustomData
 from Source.preproMethods.dataReadingAndCleaning import dataReadingAndCleaningClass
-
+from Source.prediction.predictionPipline import PredictPipeline
 app = Flask(__name__)
 model = pickle.load(open("D:\\COMPUTER VISOIN\\PROJECT\\Airine3\\artifacts\\flight_rf.pkl", "rb"))
 
@@ -48,14 +48,12 @@ def predict():
         pred_df = data.isertValueInDuration(pred_df)
         pred_df = dataReadingAndCleaningC.convertDurationToMunutes(pred_df)
         pred_df  = data.dropUncessaryColumns(pred_df)
-
+        PredictPipeline1 = PredictPipeline()
+        output = PredictPipeline1.predict(pred_df)
 
         pred_df.to_csv("D:\\MachineLearningProjects\\PROJECT\\Airline-4\\cleanedData\\abc.csv")
 
-
-        #output = round(prediction[0], 2)
-
-        #return render_template('home.html', prediction_text="Your Flight price is Rs. {}".format(output))
+        return render_template('home.html', prediction_text="Your Flight price is Rs. {}".format(output))
 
     return render_template("home.html")
 
