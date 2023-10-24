@@ -31,8 +31,6 @@
     <br><br><br>
     <div class="container">
         <form action="\predict" method="post">
-
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
@@ -56,11 +54,9 @@
                     </div>
                 </div>
             </div>
-
             <br>
             <br>
             <br>
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
@@ -68,10 +64,13 @@
                             <!-- Source -->
                             <h5 class="card-title">Source</h5>
                             <select name="Source" id="Source" required="required">
+                                <option value="Banglore">Banglore</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Cochin">Cochin</option>
                                 <option value="Delhi">Delhi</option>
+                                <option value="Hyderabad">Hyderabad</option>
                                 <option value="Kolkata">Kolkata</option>
                                 <option value="Mumbai">Mumbai</option>
-                                <option value="Chennai">Chennai</option>
                             </select>
                         </div>
                     </div>
@@ -82,35 +81,33 @@
                             <h5 class="card-title">Destination</h5>
                             <!-- Destination -->
                             <select name="Destination" id="Destination" required="required">
+                                <option value="Banglore">Banglore</option>
+                                <option value="Chennai">Chennai</option>
                                 <option value="Cochin">Cochin</option>
                                 <option value="Delhi">Delhi</option>
-                                <option value="New Delhi">New Delhi</option>
                                 <option value="Hyderabad">Hyderabad</option>
                                 <option value="Kolkata">Kolkata</option>
+                                <option value="Mumbai">Mumbai</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
             <br>
             <br>
             <br>
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Stopage</h5>
                             <!-- Total Stops -->
-                            <select name="stops" required="required">
-                                <option value="0">Non-Stop</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                            <select name="Total_Stops" id="Total_Stops" required="required">
+                                <option value="non-stop">Non-Stop</option>
+                                <option value="1 stop">1</option>
+                                <option value="2 stops">2</option>
+                                <option value="3 stops">3</option>
+                                <option value="4 stops">4</option>
                             </select>
                         </div>
                     </div>
@@ -120,7 +117,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Which Airline you want to travel?</h5>
                             <!-- Airline -->
-                            <select name="airline" id="airline" required="required">
+                            <select name="Airline" id="Airline" required="required">
                                 <option value="Jet Airways">Jet Airways</option>
                                 <option value="IndiGo">IndiGo</option>
                                 <option value="Air India">Air India</option>

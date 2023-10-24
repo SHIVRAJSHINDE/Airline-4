@@ -22,6 +22,7 @@ class preproInitiator():
             df = self.cleaningObj.removeNullValues(df)
             df = self.cleaningObj.removingUnevenValues(df)
             df = self.cleaningObj.removingOutlier(column_names,airlineName,df)
+            df = self.cleaningObj.convertDateInToDayMonthYear(df)
             df = self.cleaningObj.convertHoursAndMinutesToIndependantColumns(df=df,columName="Dep_Time")
             df = self.cleaningObj.convertHoursAndMinutesToIndependantColumns(df=df,columName="Arrival_Time")
             df = self.cleaningObj.convertDurationToMunutes(df)

@@ -49,4 +49,51 @@ class CustomData():
 
             return pd.DataFrame(inputDict)
 
+        def changeDatatypeOfColumn(self,pred_df):
+            date_format = "%Y-%m-%d %H:%M:%S"
+            pred_df['Date_of_Journey'] = pd.to_datetime(pred_df['Date_of_Journey'], format=date_format)
+            pred_df['Dep_Time'] = pd.to_datetime(pred_df['Dep_Time'], format=date_format)
+            pred_df['Arrival_Time'] = pd.to_datetime(pred_df['Arrival_Time'], format=date_format)
 
+            return pred_df
+
+        def convertDateInToDayMonthYear(self, df):
+            """ Written By  : Shivraj Shinde//Version: 1.0//Revisions: None
+                Description : This will create three different columns Day,Month,Year.
+                Output      : Return dataFrame with independant Column as Day,Month,Year Columns
+                On Failure  : Raise Exception
+            """
+            try:
+                df['Day'] = pd.to_datetime(df["Date_of_Journey"], format="%Y-%m-%d").dt.day
+                df['Month'] = pd.to_datetime(df['Date_of_Journey'], format="%Y-%m-%d").dt.month
+                df['Year'] = pd.to_datetime(df['Date_of_Journey'], format="%Y-%m-%d").dt.year
+
+                return df
+
+            except Exception as e:
+                raise CustomException(e, sys)
+
+        def isertValueInDuration(self, pred_df):
+            pred_df['Duration'] = pred_df['Arrival_Time'] - pred_df['Dep_Time']
+            #hours = str()
+            Hours = pd.to_datetime(pred_df['Duration']).dt.hour
+            Minutes = pd.to_datetime(pred_df['Duration']).dt.minute
+            print(Hours)
+            print(Hours)
+
+            pred_df['Duration'] = pred_df['Duration'].astype(str)
+
+            pred_df['Duration'] = str(Hours[0])+"h "+str(Minutes[0])+"m"
+
+            #minutes =str(pd.to_datetime(pred_df['Duration']).dt.minute + "m ")
+            #pred_df['Duration'] =hours +"h "+minutes + "m "
+
+
+            return pred_df
+
+        def dropUncessaryColumns(self,df):
+            try:
+                df = df.drop(["Arrival_Time","Dep_Time","Date_of_Journey","Duration"], axis = 1)
+                return df
+            except Exception as e:
+                raise CustomException(e, sys)

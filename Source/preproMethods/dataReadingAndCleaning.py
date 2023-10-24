@@ -1,6 +1,8 @@
 
 from ExceptionLoggerAndUtils.exception import CustomException
 from ExceptionLoggerAndUtils.logger import App_Logger
+from datetime import datetime
+
 import pandas as pd
 import os
 import sys
@@ -103,9 +105,9 @@ class dataReadingAndCleaningClass():
         """
 
         try:
-            columName = columName.split("_")[0]
-            df[columName + "_Hours"] = pd.to_datetime(df['Dep_Time']).dt.hour
-            df[columName + "_Minutes"] = pd.to_datetime(df['Dep_Time']).dt.minute
+            columName1 = columName.split("_")[0]
+            df[columName1 + "_Hours"] = pd.to_datetime(df[columName]).dt.hour
+            df[columName1 + "_Minutes"] = pd.to_datetime(df[columName]).dt.minute
 
             return df
 
@@ -156,7 +158,7 @@ class dataReadingAndCleaningClass():
 
     def dropUncessaryColumns(self,df):
         try:
-            df = df.drop(["Arrival_Time","Arrival_Time","Dep_Time","Date_of_Journey","Route","Duration","Additional_Info"], axis = 1)
+            df = df.drop(["Arrival_Time","Dep_Time","Date_of_Journey","Route","Duration","Additional_Info"], axis = 1)
             return df
         except Exception as e:
             raise CustomException(e, sys)
@@ -183,3 +185,4 @@ class dataReadingAndCleaningClass():
 
         except Exception as e:
             raise CustomException(e, sys)
+
