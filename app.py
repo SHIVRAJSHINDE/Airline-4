@@ -22,11 +22,6 @@ def predict():
         return render_template(home.html)
     else:
 
-        '''dataReadingAndCleaningC = dataReadingAndCleaningClass()
-        print(Date_of_Journey, Dep_Time, Arrival_Time)
-        Date_of_Journey,Dep_Time,Arrival_Time = dataReadingAndCleaningC.changeDatatypeOfColumn(
-            Date_of_Journey = ,Dep_Time = ,Arrival_Time = )'''
-
 
         data = CustomData(Airline = request.form.get('Airline'),
                           Date_of_Journey = request.form.get('Dep_Time'),

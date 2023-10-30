@@ -50,12 +50,22 @@ class CustomData():
             return pd.DataFrame(inputDict)
 
         def changeDatatypeOfColumn(self,pred_df):
-            date_format = "%Y-%m-%d %H:%M:%S"
-            pred_df['Date_of_Journey'] = pd.to_datetime(pred_df['Date_of_Journey'], format=date_format)
-            pred_df['Dep_Time'] = pd.to_datetime(pred_df['Dep_Time'], format=date_format)
-            pred_df['Arrival_Time'] = pd.to_datetime(pred_df['Arrival_Time'], format=date_format)
 
-            return pred_df
+            """ Written By  : Shivraj Shinde//Version: 1.0//Revisions: None
+                Description : This will convert date to proper datetime format.
+                Output      : Return dataFrame with proper datetime format of Date_of_Journey
+                On Failure  : Raise Exception
+            """
+            try:
+                date_format = "%Y-%m-%d %H:%M:%S"
+                pred_df['Date_of_Journey'] = pd.to_datetime(pred_df['Date_of_Journey'], format=date_format)
+                pred_df['Dep_Time'] = pd.to_datetime(pred_df['Dep_Time'], format=date_format)
+                pred_df['Arrival_Time'] = pd.to_datetime(pred_df['Arrival_Time'], format=date_format)
+
+                return pred_df
+            except Exception as e:
+                    raise CustomException(e, sys)
+
 
         def convertDateInToDayMonthYear(self, df):
             """ Written By  : Shivraj Shinde//Version: 1.0//Revisions: None
@@ -74,6 +84,12 @@ class CustomData():
                 raise CustomException(e, sys)
 
         def isertValueInDuration(self, pred_df):
+            """ Written By  : Shivraj Shinde//Version: 1.0//Revisions: None
+                Description : This will insert hours and minutes sting value in Duration Column.
+                Output      : Return dataFrame with hours and minutes string value in Duration Column
+                On Failure  : Raise Exception
+            """
+
             pred_df['Duration'] = pred_df['Arrival_Time'] - pred_df['Dep_Time']
             #hours = str()
             Hours = pd.to_datetime(pred_df['Duration']).dt.hour
@@ -82,16 +98,17 @@ class CustomData():
             print(Hours)
 
             pred_df['Duration'] = pred_df['Duration'].astype(str)
-
             pred_df['Duration'] = str(Hours[0])+"h "+str(Minutes[0])+"m"
-
-            #minutes =str(pd.to_datetime(pred_df['Duration']).dt.minute + "m ")
-            #pred_df['Duration'] =hours +"h "+minutes + "m "
-
 
             return pred_df
 
         def dropUncessaryColumns(self,df):
+            """ Written By  : Shivraj Shinde//Version: 1.0//Revisions: None
+                Description : This will drop irrelevent columns from dataFrame
+                Output      : Return dataFrame where irrelevent columns are deleted.
+                On Failure  : Raise Exception
+            """
+
             try:
                 df = df.drop(["Arrival_Time","Dep_Time","Date_of_Journey","Duration"], axis = 1)
                 return df

@@ -14,7 +14,9 @@ class preproInitiator():
 
     def preprocessingOfData(self):
         try:
-            self.log_writer.log(self.file_object, "Good_Data folder deleted!!!")
+
+            #self.log_writer(self.file_object, "Starting preprocessing Steps!!!")
+
             column_names, NumberofColumns, airlineName = self.cleaningObj.valuesFromSchema()
 
 
@@ -28,7 +30,9 @@ class preproInitiator():
             df = self.cleaningObj.convertDurationToMunutes(df)
             df = self.cleaningObj.dropUncessaryColumns(df)
             self.cleaningObj.saveDataToFolder(df)
-            print(df.columns)
+
+            print(df)
+
             return df
 
         except Exception as e:

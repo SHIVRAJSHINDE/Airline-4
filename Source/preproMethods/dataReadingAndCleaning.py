@@ -1,7 +1,6 @@
 
 from ExceptionLoggerAndUtils.exception import CustomException
 from ExceptionLoggerAndUtils.logger import App_Logger
-from datetime import datetime
 
 import pandas as pd
 import os
@@ -14,35 +13,42 @@ class dataReadingAndCleaningClass():
     """
 
     def __init__(self):
-        self.File_Path = "C:\\Users\\shind\\JupiterWorking\\iNuron\\EDA\\Data Travel\\Data_Train.xlsx"
-        self.schema_path = 'Schemas/schema_data.json'
-        self.folder_path = "cleanedData/"
-
         self.log_writer = App_Logger()
         self.cwd=os.getcwd()
         self.file_object = open(self.cwd+'preprocessing.txt', 'a+')
 
+        self.File_Path = "C:\\Users\\shind\\JupiterWorking\\iNuron\\EDA\\Data Travel\\Data_Train.xlsx"
+        self.schema_path = 'Schemas/schema_data.json'
+        self.folder_path = "cleanedData/"
+
+
     def readingDataSet(self):
         try:
-            #print(self.FilePath)
-            self.log_writer.log(self.file_object, 'Start of Validation on files for Training')
+            self.log_writer.log(self.file_object, 'Reading File')
+
             self.df = pd.read_excel(self.File_Path,engine='openpyxl')
+
             return self.df
         except Exception as e:
             raise CustomException(e,sys)
+
     def removeNullValues(self,df):
         try:
+            self.log_writer.log(self.file_object, 'RemovingNullValues')
+
             routeMissingRow = df[df['Route'].isnull() == True].index
             df.drop(routeMissingRow, inplace=True)
+
             return df
         except Exception as e:
             raise CustomException(e,sys)
 
-
-
     def removingUnevenValues(self,df):
         try:
+            self.log_writer.log(self.file_object, 'Removing Uneven Values')
+
             df['Destination'].replace(to_replace="New Delhi", value="Delhi", inplace=True)
+
             return df
         except Exception as e:
             raise CustomException(e,sys)
@@ -106,6 +112,7 @@ class dataReadingAndCleaningClass():
 
         try:
             columName1 = columName.split("_")[0]
+            print(columName1)
             df[columName1 + "_Hours"] = pd.to_datetime(df[columName]).dt.hour
             df[columName1 + "_Minutes"] = pd.to_datetime(df[columName]).dt.minute
 
@@ -158,8 +165,10 @@ class dataReadingAndCleaningClass():
 
     def dropUncessaryColumns(self,df):
         try:
+
             df = df.drop(["Arrival_Time","Dep_Time","Date_of_Journey","Route","Duration","Additional_Info"], axis = 1)
             return df
+
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -172,9 +181,11 @@ class dataReadingAndCleaningClass():
             On Failure  : Raise Exception
         """
         try:
+
             with open(self.schema_path, 'r') as f:
                 dic = json.load(f)
                 f.close()
+
             column_names = dic['ColName']
             airlineName = dic['airlineName']
 
