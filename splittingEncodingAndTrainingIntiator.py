@@ -39,6 +39,8 @@ class splittingAndTrainingClass():
             raise CustomException(e, sys)
 
 
+
+
 if __name__ == "__main__":
     splittingAndTrainingClassObj =  splittingAndTrainingClass()
     splittingAndTrainingClassObj.splittingAndTrainingMethond()
