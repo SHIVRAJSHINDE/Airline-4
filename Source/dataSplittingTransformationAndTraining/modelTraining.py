@@ -11,7 +11,7 @@ from sklearn.svm import SVR
 
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.metrics import r2_score
-from sklearn.neighbors import KNeighborsRegressor
+
 from sklearn.tree import DecisionTreeRegressor
 from ExceptionLoggerAndUtils.logger import App_Logger
 from ExceptionLoggerAndUtils.exception import CustomException
@@ -107,10 +107,10 @@ class ModelTrainerClass:
                 obj=best_model
             )
 
-            predicted = best_model.predict(X_test)
-
-            r2_square = r2_score(y_test, predicted)
-            return r2_square
+            '''            predicted = best_model.predict(X_test)
+            
+                        r2_square = r2_score(y_test, predicted)
+                        return r2_square'''
 
         except Exception as e:
             raise CustomException(e, sys)

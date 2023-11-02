@@ -28,6 +28,7 @@ def save_object(file_path, obj):
 
 def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
     try:
+
         modelScore = {'modelName'   :[],
                       'R2core'      :[],
                       'aR2'         :[],
@@ -53,6 +54,7 @@ def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
                 print(list(models.keys())[i])
 
                 para = param[list(models.keys())[i]]
+                print(para)
 
                 gs = RandomizedSearchCV(model, para)
                 gs.fit(X_train, y_train)
@@ -60,8 +62,11 @@ def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
                 model.set_params(**gs.best_params_)
 
                 model.fit(X_train, y_train)
+
                 y_train_pred = model.predict(X_train)
+
                 y_test_pred = model.predict(X_test)
+
                 R2train_model_score = r2_score(y_train, y_train_pred)
                 R2test_model_score = r2_score(y_test, y_test_pred)
 

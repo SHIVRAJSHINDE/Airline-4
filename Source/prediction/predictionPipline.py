@@ -23,6 +23,7 @@ class PredictPipeline():
 
 
 class CustomData():
+
         def __init__(self,Airline:str,Date_of_Journey:str,Source:str,Destination:str,
                      Dep_Time:str,Arrival_Time:str,Duration:str,Total_Stops:str):
             self.Airline = Airline
@@ -35,6 +36,7 @@ class CustomData():
             self.Total_Stops = Total_Stops
 
         def getDataAsDataFrame(self):
+
             inputDict = {
                 "Airline": [self.Airline],
                 "Date_of_Journey": [self.Date_of_Journey],
@@ -48,6 +50,8 @@ class CustomData():
             }
 
             return pd.DataFrame(inputDict)
+
+
 
         def changeDatatypeOfColumn(self,pred_df):
 

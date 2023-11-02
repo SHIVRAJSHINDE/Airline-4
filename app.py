@@ -3,11 +3,13 @@ from flask_cors import cross_origin
 import sklearn
 import pickle
 import pandas as pd
+
 from Source.prediction.predictionPipline import CustomData
 from Source.preproMethods.dataReadingAndCleaning import dataReadingAndCleaningClass
 from Source.prediction.predictionPipline import PredictPipeline
+
 app = Flask(__name__)
-model = pickle.load(open("D:\\COMPUTER VISOIN\\PROJECT\\Airine3\\artifacts\\flight_rf.pkl", "rb"))
+
 
 
 @app.route("/")
@@ -15,13 +17,13 @@ model = pickle.load(open("D:\\COMPUTER VISOIN\\PROJECT\\Airine3\\artifacts\\flig
 def home():
     return render_template("home.html")
 
+
 @app.route("/predict", methods=["GET", "POST"])
 @cross_origin()
 def predict():
     if request.method=="GET":
         return render_template(home.html)
     else:
-
 
         data = CustomData(Airline = request.form.get('Airline'),
                           Date_of_Journey = request.form.get('Dep_Time'),
@@ -34,13 +36,21 @@ def predict():
         )
 
         pred_df = data.getDataAsDataFrame()
+        print(pred_df)
+
+
         pred_df = data.changeDatatypeOfColumn(pred_df)
         pred_df = data.convertDateInToDayMonthYear(pred_df)
 
+
         dataReadingAndCleaningC=dataReadingAndCleaningClass()
+
         pred_df = dataReadingAndCleaningC.convertHoursAndMinutesToIndependantColumns(df=pred_df, columName="Dep_Time")
         pred_df = dataReadingAndCleaningC.convertHoursAndMinutesToIndependantColumns(df=pred_df, columName="Arrival_Time")
+
+
         pred_df = data.isertValueInDuration(pred_df)
+        print(pred_df.T)
         pred_df = dataReadingAndCleaningC.convertDurationToMunutes(pred_df)
         pred_df  = data.dropUncessaryColumns(pred_df)
         PredictPipeline1 = PredictPipeline()

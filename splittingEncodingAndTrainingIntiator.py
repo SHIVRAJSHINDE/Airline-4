@@ -21,18 +21,10 @@ class splittingAndTrainingClass():
         try:
 
             X_train, X_test, y_train, y_test = self.dataSplittingTransformationC.dataReadingAndSplitting(self.File_Path)
-
             transformationOfData =self.dataSplittingTransformationC.dataTransformation()
-
 
             X_train = transformationOfData.fit_transform(X_train)
             X_test = transformationOfData.transform(X_test)
-
-            '''abc=pd.DataFrame(X_train.T)
-            print(abc)
-            abc.to_csv("cleanedData/Train.csv")
-            '''
-            '''
 
             save_object(
                 file_path= self.transformationFilePath,
@@ -40,6 +32,7 @@ class splittingAndTrainingClass():
             )
 
             models,params = self.ModelTrainerClass.modelsToTrainAndParameters()
+
             self.ModelTrainerClass.modelTraingMethod(X_train, X_test, y_train, y_test,models,params)
 
         except Exception as e:
