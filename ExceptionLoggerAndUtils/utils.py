@@ -88,6 +88,8 @@ def evaluate_Regression_models(X_train, y_train, X_test, y_test, models, param):
                 modelScore['RMSE'].append(RMSE)
                 k = k+1
 
+
+
         print(pd.DataFrame(modelScore))
         #print(modelScore)
         print(ar2Score)
