@@ -16,17 +16,16 @@ class dataReadingAndCleaningClass():
         self.log_writer = App_Logger()
         self.cwd=os.getcwd()
         self.file_object = open(self.cwd+'preprocessing.txt', 'a+')
-
-        self.File_Path = "C:\\Users\\shind\\JupiterWorking\\iNuron\\EDA\\Data Travel\\Data_Train.xlsx"
-        self.schema_path = 'Schemas/schema_data.json'
+        self.schema_path = "Schemas/schema_data.json"
+        #self.schema_path = 'D:\\MachineLearningProjects\\PROJECT\\Airline - 4\\Schemas\\schema_data.json'
         self.folder_path = "cleanedData/"
 
 
-    def readingDataSet(self):
+    def readingDataSet(self,File_Path):
         try:
             self.log_writer.log(self.file_object, 'Reading File')
 
-            self.df = pd.read_excel(self.File_Path,engine='openpyxl')
+            self.df = pd.read_excel(File_Path,engine='openpyxl')
 
             return self.df
         except Exception as e:

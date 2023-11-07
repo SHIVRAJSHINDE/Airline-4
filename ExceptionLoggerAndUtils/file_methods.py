@@ -6,7 +6,7 @@ import shutil
 class File_Operation:
     """ Written By: Shivraj Shinde//Version: 1.0//Revisions: None
         This class shall be used to save the model after training
-        and load the saved model for prediction.
+        and load the saved model for Pipeline03Prediction.
     """
     def __init__(self,file_object,logger_object):
         self.file_object = file_object
