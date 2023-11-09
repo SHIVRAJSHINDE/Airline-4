@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 from flask_cors import cross_origin
 
-
 from Pipeline.Pipeline01Preprocessing.dataReadingAndCleaningFile import dataReadingAndCleaningClass
 from Pipeline.Pipeline03Prediction.predictionDataPreprocessingFile import predictionDataPreprocessingClass
 from Pipeline.Pipeline03Prediction.predictionFile import predictionClass
