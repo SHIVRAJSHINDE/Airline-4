@@ -10,9 +10,6 @@ from Initiator03Prediction import predictionInitiatorClass
 app = Flask(__name__)
 
 
-
-
-
 @app.route("/")
 @cross_origin()
 def home():
