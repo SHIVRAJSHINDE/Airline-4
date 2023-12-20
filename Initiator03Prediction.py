@@ -20,12 +20,11 @@ class predictionInitiatorClass():
         pred_df = self.predictionDataPreprocessingObj.convertDateInToDayMonthYear(pred_df)
         pred_df = self.dataReadingAndCleaningObj.convertHoursAndMinutesToIndependantColumns(df=pred_df, columName="Dep_Time")
         pred_df = self.dataReadingAndCleaningObj.convertHoursAndMinutesToIndependantColumns(df=pred_df, columName="Arrival_Time")
-
         pred_df = self.predictionDataPreprocessingObj.isertValueInDuration(pred_df)
         print(pred_df.T)
         pred_df = self.dataReadingAndCleaningObj.convertDurationToMunutes(pred_df)
-
         pred_df  = self.predictionDataPreprocessingObj.dropUncessaryColumns(pred_df)
-
         output = self.predictionObj.predictionMethod(pred_df)
+
+
         return output

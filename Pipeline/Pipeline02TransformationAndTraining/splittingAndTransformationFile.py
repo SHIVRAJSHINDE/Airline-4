@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder,OrdinalEncoder
-
 from sklearn.preprocessing import MinMaxScaler,StandardScaler
 
 import os
